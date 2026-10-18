@@ -1,0 +1,16 @@
+{
+  "name": "Körpersignale",
+  "short_name": "Körpersignale",
+  "description": "Was spürst du gerade im Körper? Mögliche Gefühle, eine Frage und eine Übung für eine Minute. Von Dr. Mandy Zimmermann",
+  "lang": "de",
+  "start_url": "/tools/body-signals/",
+  "scope": "/tools/body-signals/",
+  "display": "standalone",
+  "background_color": "#f7f2ee",
+  "theme_color": "#451b0c",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

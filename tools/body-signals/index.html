@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Körpersignale · Dr. Mandy Zimmermann</title>
+<meta name="description" content="Was spürst du gerade im Körper? Finde heraus, welche Gefühle dahinterstecken könnten, mit einer Frage und einer Übung für eine Minute.">
+<meta name="theme-color" content="#f7f2ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#24120a" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Körpersignale">
+<style>
+@font-face{font-family:"Source Serif 4";font-weight:400;font-display:swap;src:url(../../source-serif-4-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Serif 4";font-weight:600;font-display:swap;src:url(../../source-serif-4-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Work Sans";font-weight:400;font-display:swap;src:url(../../work-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Work Sans";font-weight:500;font-display:swap;src:url(../../work-sans-latin-500-normal.woff2) format("woff2")}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+[hidden]{display:none!important}
+:root{
+  --paper:#f7f2ee; --sand:#ebe2da; --brown:#451b0c; --text:#3a1a0d;
+  --terra:#c5643a; --peach:#fcd8b4; --sky:#acc5db; --muted:#7a5a4b; --line:#dccfc4; --card:#fffaf6;
+  --body:#e6d6c8; --bodyHover:#f0c9a6;
+  --serif:"Source Serif 4", Georgia, serif; --sans:"Work Sans", system-ui, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#24120a; --sand:#301a10; --brown:#fcd8b4; --text:#f3e6dc; --terra:#e07d52; --peach:#4a2617; --sky:#7f9fbb; --muted:#c3a594; --line:#4a2c1d; --card:#2c170d;
+  --body:#4a2c1d; --bodyHover:#6b3a22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#24120a; --sand:#301a10; --brown:#fcd8b4; --text:#f3e6dc; --terra:#e07d52; --peach:#4a2617; --sky:#7f9fbb; --muted:#c3a594; --line:#4a2c1d; --card:#2c170d;
+  --body:#4a2c1d; --bodyHover:#6b3a22; color-scheme:dark}
+html,body{background:var(--paper);color:var(--text)}
+body{font-family:var(--sans);font-size:17px;line-height:1.55;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.brand{font-family:var(--serif);font-weight:600;color:var(--brown);text-decoration:none;font-size:.95rem}
+.langs{display:flex;gap:4px}
+.langs button{font:500 .78rem var(--sans);border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:20px;padding:4px 9px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--brown);color:var(--paper);border-color:var(--brown)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--brown);line-height:1.2;margin:0}
+h1{font-size:2rem;margin:18px 0 10px}
+h2{font-size:1.35rem;margin-bottom:12px}
+h3{font-size:1.05rem;margin-bottom:6px}
+p{margin:0 0 12px}
+.lead{color:var(--muted)}
+.step{font:500 .78rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--terra);margin:28px 0 8px}
+
+.bodywrap{display:flex;justify-content:center;margin:8px 0 4px}
+svg.figure{width:min(210px,52vw);height:auto;overflow:visible}
+.figure .part{fill:var(--body);stroke:var(--paper);stroke-width:2;stroke-linejoin:round;cursor:pointer;transition:fill .15s}
+.figure .zone:hover .part,.figure .zone:focus-visible .part{fill:var(--bodyHover)}
+.figure .zone:focus{outline:none}
+.figure .zone.sel .part{fill:var(--terra)}
+.figure .back{fill:none;stroke:var(--terra);stroke-width:2.5;stroke-dasharray:5 5;pointer-events:none;opacity:0;transition:opacity .15s}
+.figure .back.on{opacity:1}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{font:400 .92rem var(--sans);border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:22px;padding:8px 14px;cursor:pointer}
+.chip:hover{border-color:var(--terra)}
+.chip[aria-pressed="true"]{background:var(--brown);color:var(--paper);border-color:var(--brown)}
+.sens{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sens .chip{border-radius:10px;text-align:left;padding:12px 14px}
+.sens .chip small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.sens .chip[aria-pressed="true"] small{color:var(--peach)}
+
+.result{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--terra);border-radius:6px;padding:22px 20px 10px;margin-top:28px}
+.where{font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.feelings{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px}
+.feelings span{background:var(--peach);color:var(--brown);border-radius:20px;padding:5px 12px;font-weight:500;font-size:.95rem}
+.box{border-top:1px solid var(--line);padding-top:14px;margin-top:6px}
+.question{font-family:var(--serif);font-size:1.2rem;color:var(--brown);margin:2px 0 14px}
+.ex ol{margin:6px 0 12px;padding-left:20px}
+.ex li{margin-bottom:4px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{font:500 .95rem var(--sans);border:none;border-radius:40px;padding:12px 20px;cursor:pointer;background:var(--brown);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--brown)}
+.btn:hover{background:var(--terra);color:#fff;border-color:var(--terra)}
+
+.info{margin-top:44px;border-top:1px solid var(--line);padding-top:8px}
+.info details{border-bottom:1px solid var(--line);padding:12px 0}
+.info summary{cursor:pointer;font-weight:500;color:var(--brown)}
+.info details p{margin:10px 0 4px;font-size:.93rem}
+.contact{background:#451b0c;color:#ebe2da;border-radius:6px;padding:22px 20px;margin-top:32px}
+.contact p{margin:0 0 14px}
+.contact a.btn{display:inline-block;background:#fcd8b4;color:#451b0c;text-decoration:none}
+.contact a.btn:hover{background:var(--terra);color:#fff}
+footer.legal{display:flex;justify-content:center;gap:18px;font-size:.78rem;color:var(--muted);margin-top:24px}
+footer.legal a{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <a class="brand" href="/">Dr. Mandy Zimmermann</a>
+    <div class="langs" id="langs"></div>
+  </header>
+
+  <h1 id="tTitle"></h1>
+  <p class="lead" id="tIntro"></p>
+
+  <div class="step" id="tStep1"></div>
+  <div class="bodywrap">
+    <svg class="figure" viewBox="0 0 200 410" role="group" id="figure">
+      <path class="back" id="backOutline" d="M58,92 L142,92 L146,118 L138,244 Q100,256 62,244 L54,118 Z"/>
+      <g class="zone" data-r="kopf" tabindex="0" role="button"><path class="part" d="M74,46 A26,32 0 0 1 126,46 Z"/></g>
+      <g class="zone" data-r="kiefer" tabindex="0" role="button"><path class="part" d="M74,46 A26,32 0 0 0 126,46 Z"/></g>
+      <g class="zone" data-r="hals" tabindex="0" role="button"><path class="part" d="M89,76 L111,76 L113,94 L87,94 Z"/></g>
+      <g class="zone" data-r="schultern" tabindex="0" role="button"><path class="part" d="M54,118 Q52,98 70,94 L87,94 L113,94 L130,94 Q148,98 146,118 Z"/></g>
+      <g class="zone" data-r="brust" tabindex="0" role="button"><path class="part" d="M58,118 L142,118 L139,182 L61,182 Z"/></g>
+      <g class="zone" data-r="bauch" tabindex="0" role="button"><path class="part" d="M61,182 L139,182 L137,242 Q100,254 63,242 Z"/></g>
+      <g class="zone" data-r="arme" tabindex="0" role="button">
+        <path class="part" d="M54,118 L50,104 Q42,108 40,120 L26,212 L44,215 L57,140 Z"/>
+        <path class="part" d="M146,118 L150,104 Q158,108 160,120 L174,212 L156,215 L143,140 Z"/>
+        <ellipse class="part" cx="34" cy="230" rx="10" ry="15"/>
+        <ellipse class="part" cx="166" cy="230" rx="10" ry="15"/>
+      </g>
+      <g class="zone" data-r="beine" tabindex="0" role="button">
+        <path class="part" d="M64,246 Q80,252 98,252 L96,380 L76,380 Z"/>
+        <path class="part" d="M102,252 Q120,252 136,246 L124,380 L104,380 Z"/>
+        <ellipse class="part" cx="84" cy="391" rx="15" ry="8"/>
+        <ellipse class="part" cx="116" cy="391" rx="15" ry="8"/>
+      </g>
+    </svg>
+  </div>
+  <div class="chips" id="regionChips"></div>
+
+  <section id="sensSec" hidden>
+    <div class="step" id="tStep2"></div>
+    <div class="sens" id="sensChips"></div>
+  </section>
+
+  <section class="result" id="result" hidden aria-live="polite"></section>
+
+  <section class="info">
+    <details><summary id="tResH"></summary><p id="tRes"></p></details>
+    <details><summary id="tMedH"></summary><p id="tMed"></p></details>
+    <details><summary id="tPrivH"></summary><p id="tPriv"></p></details>
+    <details id="installBox"><summary id="tInstH"></summary><p id="tInst"></p></details>
+  </section>
+
+  <section class="contact">
+    <p id="tContact"></p>
+    <a class="btn" href="/" id="tContactBtn"></a>
+  </section>
+
+  <footer class="legal"><a href="../../legal.html" id="tLegal"></a><a href="../../privacy.html" id="tPrivacy"></a></footer>
+</main>
+
+<script>
+/* Inhalte. Weitere Sprachen (en, es) werden als zusätzliche Einträge in T ergänzt, der Sprachschalter erscheint dann automatisch. */
+const T = {
+de: {
+  title:"Körpersignale",
+  intro:"Was spürst du gerade im Körper? Tippe auf die Stelle, wähle aus, wie es sich anfühlt, und sieh nach, welche Gefühle dahinterstecken könnten. Das dauert eine Minute und hilft dir, vor dem nächsten Gespräch klarer zu sein.",
+  step1:"Wo spürst du etwas?", step2:"Wie fühlt es sich an?",
+  backNote:"Der Rücken ist in der Figur gestrichelt markiert.",
+  feelingsH:"Dahinter könnte stecken", questionH:"Frage an dich", exH:"Eine Minute für dich",
+  hint:"Das sind Möglichkeiten und keine Diagnose. Du kennst dich selbst am besten. Wenn keines der Gefühle passt, ist auch das eine wertvolle Information.",
+  otherSens:"Andere Empfindung", otherRegion:"Andere Stelle",
+  resH:"Zur Forschung",
+  res:"Die App stützt sich unter anderem auf die Studie „Bodily maps of emotions“ (Nummenmaa und Kollegen, 2014). Darin markierten Menschen aus verschiedenen Kulturen, wo sie bestimmte Gefühle im Körper spüren, und zeigten dabei sehr ähnliche Muster. Die Zuordnungen in dieser App sind eine Orientierung und können bei jedem Menschen anders sein.",
+  resLink:"Zur Studie",
+  medH:"Medizinischer Hinweis",
+  med:"Körperliche Empfindungen können auch medizinische Ursachen haben. Bei anhaltenden, starken oder neuen Beschwerden wende dich bitte an eine Ärztin oder einen Arzt. Bei Brustschmerz, Atemnot oder Taubheit in Arm oder Gesicht ruf sofort den Notruf 112.",
+  privH:"Datenschutz", priv:"Die App speichert nichts und sendet keine Daten. Alles bleibt auf deinem Gerät.",
+  instH:"Als App auf dem Handy speichern",
+  inst:"Auf dem iPhone tippst du in Safari auf Teilen und dann auf „Zum Home-Bildschirm“. Auf Android öffnest du das Menü im Browser und wählst „App installieren“ oder „Zum Startbildschirm hinzufügen“.",
+  contact:"Du möchtest mit deinem Team gesünder führen und besser mit Druck umgehen? Ich begleite Führungskräfte und Teams dabei.",
+  contactBtn:"drmandyzimmermann.com", legal:"Impressum", privacy:"Datenschutz",
+  regions:{kopf:"Kopf und Stirn",kiefer:"Kiefer und Gesicht",hals:"Hals und Kehle",schultern:"Nacken und Schultern",brust:"Brust und Herz",bauch:"Bauch und Magen",ruecken:"Rücken",arme:"Arme und Hände",beine:"Beine und Füße"},
+  sens:{
+    eng:["Eng oder angespannt","Etwas zieht sich zusammen oder hält fest."],
+    druck:["Druck","Etwas drückt von innen oder lastet von außen."],
+    warm:["Warm oder heiß","Wärme steigt auf oder breitet sich aus."],
+    kalt:["Kalt","Die Stelle fühlt sich kühl oder weniger durchblutet an."],
+    kribbelig:["Kribbelig","Es prickelt, summt oder vibriert."],
+    schwer:["Schwer","Die Stelle fühlt sich müde und schwer an."],
+    leer:["Leer oder taub","Man spürt dort wenig oder fast nichts."],
+    unruhig:["Unruhig oder flatternd","Es zappelt, flattert oder will sich bewegen."]
+  },
+  ex:{
+    1:["Länger ausatmen",["Atme vier Zählzeiten durch die Nase ein.","Atme sechs bis acht Zählzeiten langsam aus.","Wiederhole das fünf Mal. Ein langer Ausatem hilft dem Körper, vom Alarm in die Ruhe zu wechseln."]],
+    2:["Boden spüren",["Stell beide Füße flach auf den Boden und drück sie leicht hinein.","Spüre Fersen, Ballen und Zehen nacheinander.","Achte darauf, wie der Stuhl dich trägt."]],
+    3:["Schultern loslassen",["Zieh beim Einatmen die Schultern bewusst zu den Ohren und halte sie kurz.","Lass sie beim Ausatmen fallen.","Wiederhole das drei Mal und lass die Arme danach locker hängen."]],
+    4:["Kiefer lockern",["Leg die Zungenspitze hinter die oberen Schneidezähne und lass die Zähne leicht auseinander.","Öffne den Mund langsam und schließe ihn wieder.","Massiere mit den Fingerspitzen kurz die Kaumuskeln."]],
+    5:["Hand auflegen",["Leg eine Hand auf die Stelle, die du spürst.","Atme dorthin, ohne etwas verändern zu wollen.","Nimm wahr, ob sich die Empfindung unter der Hand verändert."]],
+    6:["Gefühl benennen",["Sag oder schreib in einem Satz: „Gerade spüre ich … und ich glaube, das ist …“","Studien zeigen, dass das Benennen eines Gefühls dessen Intensität oft verringert."]],
+    7:["Kurz bewegen",["Steh auf und geh eine Minute, zum Beispiel zum Fenster oder einmal über den Flur.","Schüttle dabei Arme und Hände aus.","Bewegung gibt der Energie im Körper einen Ausweg."]],
+    8:["Den Raum wahrnehmen",["Schau dich um und benenne still drei Dinge, die du siehst.","Dann zwei Dinge, die du hörst, und eins, das du spürst.","Das holt die Aufmerksamkeit aus dem Kopf zurück in den Moment."]]
+  },
+  /* Region > Empfindung: [Gefühle, Erklärung, Frage, Übung] */
+  map:{
+    kopf:{
+      druck:["Überforderung, Anspannung, unterdrückter Ärger","Druck im Kopf tritt häufig auf, wenn zu viel gleichzeitig gedacht und entschieden werden muss.","Was davon muss heute wirklich von dir entschieden werden?",1],
+      warm:["Ärger, Scham, Aufregung","Wärme im Kopf und Gesicht entsteht oft, wenn man sich angegriffen oder bloßgestellt fühlt.","Was hat dich in den letzten Minuten getroffen?",1],
+      leer:["Erschöpfung, Rückzug, Überforderung","Leere im Kopf kann ein Zeichen sein, dass das Nervensystem auf Sparflamme schaltet.","Wann hattest du zuletzt eine echte Pause?",8],
+      unruhig:["Nervosität, Sorge, Ungeduld","Kreisende Gedanken gehen oft mit einem unruhigen Gefühl im Kopf einher.","Welcher Gedanke kommt immer wieder?",6]},
+    kiefer:{
+      eng:["Ärger, Entschlossenheit, Zurückhaltung","Ein fester Kiefer zeigt oft, dass man etwas aushält oder sich verkneift, etwas zu sagen.","Was würdest du gerade gern sagen und tust es nicht?",4],
+      warm:["Scham, Verlegenheit, Ärger","Erröten und Wärme im Gesicht treten häufig auf, wenn man sich beobachtet oder bewertet fühlt.","Von wem fühlst du dich gerade bewertet?",1]},
+    hals:{
+      eng:["Traurigkeit, Angst, Ekel","Der bekannte Kloß im Hals entsteht oft, wenn Tränen oder Worte zurückgehalten werden.","Was hältst du gerade zurück?",6],
+      druck:["Unausgesprochener Ärger, Hilflosigkeit","Druck im Hals kann auftreten, wenn man etwas sagen möchte und den Moment dafür nicht findet.","Wem müsstest du etwas Klares sagen?",1],
+      warm:["Rührung, Aufregung, Scham","Wärme im Hals begleitet häufig starke Gefühle kurz bevor man spricht.","Was bewegt dich gerade so sehr?",5]},
+    schultern:{
+      eng:["Stress, Wachsamkeit, Angst","Hochgezogene Schultern sind eine alte Schutzhaltung, die bei Anspannung oft unbemerkt bleibt.","Wovor willst du dich gerade schützen?",3],
+      schwer:["Verantwortungsdruck, Erschöpfung, Pflichtgefühl","Schwere auf den Schultern beschreibt häufig das Gefühl, zu viel allein zu tragen.","Was trägst du gerade, das jemand anderes tragen könnte?",3],
+      druck:["Zeitdruck, Ärger, Überforderung","Druck im Nacken tritt oft bei Termindruck oder anhaltendem Ärger auf.","Welche Erwartung sitzt dir gerade im Nacken?",3]},
+    brust:{
+      eng:["Angst, Sorge, Stress","Enge in der Brust gehört zu den häufigsten Körperzeichen von Angst, weil der Atem flacher wird.","Was befürchtest du gerade konkret?",1],
+      druck:["Traurigkeit, Enttäuschung, Belastung","Druck auf der Brust beschreiben viele Menschen bei Kummer oder anhaltender Belastung.","Was hat dich enttäuscht?",5],
+      warm:["Freude, Zuneigung, Stolz, auch Ärger","Wärme in der Brust zeigt sich bei angenehmen Gefühlen ebenso wie bei aufsteigendem Ärger.","Ist es eher Verbundenheit oder eher Ärger?",5],
+      schwer:["Traurigkeit, Mutlosigkeit, Schuld","Ein schweres Herz ist ein Bild, das viele Sprachen für Traurigkeit kennen.","Wofür fühlst du dich gerade verantwortlich?",5],
+      unruhig:["Aufregung, Nervosität, Vorfreude","Herzklopfen tritt bei Nervosität und bei Vorfreude auf, der Körper unterscheidet hier wenig.","Freust du dich oder fürchtest du dich, vielleicht beides?",1]},
+    bauch:{
+      eng:["Angst, Unsicherheit, Ablehnung","Ein zusammengezogener Magen tritt oft auf, wenn etwas Unangenehmes bevorsteht.","Was liegt dir vor dem nächsten Termin im Magen?",5],
+      unruhig:["Nervosität, Lampenfieber, Vorfreude","Schmetterlinge im Bauch zeigen Aufregung, ob vor einer Präsentation oder einem schönen Ereignis.","Was steht für dich auf dem Spiel?",1],
+      schwer:["Sorge, Widerwillen, Schuld","Ein Stein im Magen beschreibt oft etwas, das man nicht verdauen kann oder will.","Was fällt dir gerade schwer anzunehmen?",5],
+      leer:["Verunsicherung, Verlust, Erschöpfung","Leere im Bauch kann auftreten, wenn Halt oder Orientierung fehlen.","Was gibt dir gerade Halt?",2],
+      warm:["Ärger, Empörung, auch Wohlgefühl","Wut im Bauch ist eine verbreitete Beschreibung für Ärger, der sich aufstaut.","Worüber ärgerst du dich, ohne es zu zeigen?",7]},
+    ruecken:{
+      eng:["Stress, Abwehr, fehlende Unterstützung","Ein angespannter Rücken kann zeigen, dass man sich aufrecht halten muss, ohne Rückendeckung zu spüren.","Von wem hättest du gerade gern Rückendeckung?",7],
+      schwer:["Erschöpfung, Last, Resignation","Schwere im Rücken tritt oft auf, wenn Belastung über längere Zeit anhält.","Was müsstest du ablegen, damit es leichter wird?",2]},
+    arme:{
+      kribbelig:["Ärger, Tatendrang, Ungeduld","Kribbeln in Armen und Händen zeigt oft, dass der Körper handeln will.","Was würdest du jetzt am liebsten anpacken?",7],
+      warm:["Ärger, Wut, Energie","In der Forschung zeigen sich bei Ärger besonders deutliche Empfindungen in Armen und Händen.","Wogegen möchtest du dich wehren?",7],
+      kalt:["Angst, Anspannung, Unsicherheit","Kalte Hände entstehen oft bei Anspannung, weil der Körper Blut in die Körpermitte lenkt.","Wo fühlst du dich gerade unsicher?",1],
+      unruhig:["Nervosität, Ungeduld, Anspannung","Zappelnde Hände und Finger zeigen häufig innere Unruhe, die nach einem Ventil sucht.","Worauf wartest du gerade?",2]},
+    beine:{
+      schwer:["Traurigkeit, Erschöpfung, Lustlosigkeit","In der Forschung geht Traurigkeit mit verminderter Empfindung in Armen und Beinen einher, viele beschreiben das als Schwere.","Was würde dir gerade wieder Kraft geben?",7],
+      unruhig:["Ungeduld, Fluchtimpuls, Nervosität","Wippende Beine zeigen oft den Wunsch, aus einer Situation herauszukommen.","Wohin würdest du jetzt am liebsten gehen?",7],
+      leer:["Angst, Unsicherheit, Ohnmacht","Weiche Knie beschreiben das Gefühl, keinen festen Stand zu haben.","Was bräuchtest du, um wieder sicher zu stehen?",2]}
+  }
+}};
+const REGIONS=["kopf","kiefer","hals","schultern","brust","bauch","ruecken","arme","beine"];
+const SENS=["eng","druck","warm","kalt","kribbelig","schwer","leer","unruhig"];
+const STUDY="https://doi.org/10.1073/pnas.1321664111";
+
+const store={get(k,d){try{const v=localStorage.getItem("ks_"+k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem("ks_"+k,v)}catch(e){}}};
+let lang=store.get("lang",null)||(()=>{const l=(navigator.language||"de").slice(0,2);return T[l]?l:"de"})();
+if(!T[lang]) lang="de";
+let region=null, sens=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function renderLangs(){
+  const langs=Object.keys(T);
+  $("langs").innerHTML = langs.length>1 ? langs.map(l=>`<button data-lang="${l}" aria-pressed="${l===lang}">${l.toUpperCase()}</button>`).join("") : "";
+  $("langs").querySelectorAll("button").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;store.set("lang",lang);renderAll()});
+}
+function renderStatic(){
+  const t=T[lang]; document.documentElement.lang=lang; document.title=t.title+" · Dr. Mandy Zimmermann";
+  const map={tTitle:"title",tIntro:"intro",tStep1:"step1",tStep2:"step2",tResH:"resH",tMedH:"medH",tMed:"med",tPrivH:"privH",tPriv:"priv",tInstH:"instH",tInst:"inst",tContact:"contact",tContactBtn:"contactBtn",tLegal:"legal",tPrivacy:"privacy"};
+  for(const id in map) $(id).textContent=t[map[id]];
+  $("tRes").innerHTML=esc(t.res)+` <a href="${STUDY}" target="_blank" rel="noopener">${esc(t.resLink)}</a>`;
+  document.querySelectorAll(".zone").forEach(z=>z.setAttribute("aria-label",t.regions[z.dataset.r]));
+}
+function renderRegions(){
+  const t=T[lang];
+  $("regionChips").innerHTML=REGIONS.map(r=>`<button class="chip" data-r="${r}" aria-pressed="${r===region}">${esc(t.regions[r])}</button>`).join("");
+  $("regionChips").querySelectorAll("button").forEach(b=>b.onclick=()=>pickRegion(b.dataset.r));
+  document.querySelectorAll(".zone").forEach(z=>z.classList.toggle("sel",z.dataset.r===region));
+  $("backOutline").classList.toggle("on",region==="ruecken");
+}
+function renderSens(){
+  const t=T[lang];
+  if(!region){$("sensSec").hidden=true;return}
+  $("sensSec").hidden=false;
+  const avail=SENS.filter(s=>t.map[region][s]);
+  $("sensChips").innerHTML=avail.map(s=>`<button class="chip" data-s="${s}" aria-pressed="${s===sens}">${esc(t.sens[s][0])}<small>${esc(t.sens[s][1])}</small></button>`).join("");
+  $("sensChips").querySelectorAll("button").forEach(b=>b.onclick=()=>pickSens(b.dataset.s));
+}
+function renderResult(){
+  const t=T[lang], box=$("result");
+  if(!region||!sens||!t.map[region][sens]){box.hidden=true;return}
+  const [feel,expl,q,exId]=t.map[region][sens], ex=t.ex[exId];
+  box.innerHTML=`
+    <div class="where">${esc(t.regions[region])} · ${esc(t.sens[sens][0])}</div>
+    <h2>${esc(t.feelingsH)}</h2>
+    <div class="feelings">${feel.split(", ").map(f=>`<span>${esc(f)}</span>`).join("")}</div>
+    <p>${esc(expl)}</p>
+    <div class="box"><h3>${esc(t.questionH)}</h3><p class="question">${esc(q)}</p></div>
+    <div class="box ex"><h3>${esc(t.exH)}: ${esc(ex[0])}</h3><ol>${ex[1].map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>
+    <p class="hint">${esc(t.hint)}</p>
+    <div class="actions"><button class="btn ghost" id="btnSens">${esc(t.otherSens)}</button><button class="btn ghost" id="btnRegion">${esc(t.otherRegion)}</button></div>`;
+  box.hidden=false;
+  $("btnSens").onclick=()=>{sens=null;renderAll();$("sensSec").scrollIntoView({behavior:"smooth",block:"start"})};
+  $("btnRegion").onclick=()=>{region=null;sens=null;renderAll();$("tStep1").scrollIntoView({behavior:"smooth",block:"start"})};
+}
+function pickRegion(r){
+  region=r; sens=null; renderAll();
+  requestAnimationFrame(()=>$("sensSec").scrollIntoView({behavior:"smooth",block:"start"}));
+}
+function pickSens(s){
+  sens=s; renderAll();
+  requestAnimationFrame(()=>$("result").scrollIntoView({behavior:"smooth",block:"start"}));
+}
+function renderAll(){renderLangs();renderStatic();renderRegions();renderSens();renderResult()}
+
+document.querySelectorAll(".zone").forEach(z=>{
+  z.addEventListener("click",()=>pickRegion(z.dataset.r));
+  z.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pickRegion(z.dataset.r)}});
+});
+renderAll();
+if("serviceWorker" in navigator){ window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{})); }
+</script>
+</body>
+</html>
