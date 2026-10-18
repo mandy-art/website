@@ -72,7 +72,8 @@ svg.figure{width:min(210px,52vw);height:auto;overflow:visible}
 .result{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--terra);border-radius:6px;padding:22px 20px 10px;margin-top:28px}
 .where{font-size:.85rem;color:var(--muted);margin-bottom:6px}
 .feelings{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px}
-.feelings span{background:var(--peach);color:var(--brown);border-radius:20px;padding:5px 12px;font-weight:500;font-size:.95rem}
+.feelings span::first-letter{text-transform:uppercase}
+.feelings span{display:inline-block;background:var(--peach);color:var(--brown);border-radius:20px;padding:5px 12px;font-weight:500;font-size:.95rem}
 .box{border-top:1px solid var(--line);padding-top:14px;margin-top:6px}
 .question{font-family:var(--serif);font-size:1.2rem;color:var(--brown);margin:2px 0 14px}
 .ex ol{margin:6px 0 12px;padding-left:20px}
@@ -239,7 +240,172 @@ de: {
       unruhig:["Ungeduld, Fluchtimpuls, Nervosität","Wippende Beine zeigen oft den Wunsch, aus einer Situation herauszukommen.","Wohin würdest du jetzt am liebsten gehen?",7],
       leer:["Angst, Unsicherheit, Ohnmacht","Weiche Knie beschreiben das Gefühl, keinen festen Stand zu haben.","Was bräuchtest du, um wieder sicher zu stehen?",2]}
   }
-}};
+},
+en: {
+  title:"Body Signals",
+  intro:"What are you feeling in your body right now? Tap the spot, choose how it feels, and see which emotions might be behind it. It takes a minute and helps you go into your next conversation with a clearer head.",
+  step1:"Where do you feel something?", step2:"How does it feel?",
+  backNote:"The back is marked with a dashed line on the figure.",
+  feelingsH:"What might be behind it", questionH:"A question for you", exH:"One minute for you",
+  hint:"These are possibilities, not a diagnosis. You know yourself best. If none of these emotions fits, that is useful information too.",
+  otherSens:"Different sensation", otherRegion:"Different spot",
+  resH:"About the research",
+  res:"This app draws on the study “Bodily maps of emotions” (Nummenmaa and colleagues, 2014), among other sources. People from different cultures marked where in the body they feel certain emotions, and their patterns were very similar. The links in this app are meant as orientation and can be different for every person.",
+  resLink:"Read the study",
+  medH:"Medical note",
+  med:"Physical sensations can also have medical causes. If symptoms are persistent, strong or new, please see a doctor. If you have chest pain, shortness of breath or numbness in an arm or your face, call your local emergency number straight away (112 in Europe).",
+  privH:"Privacy", priv:"The app does not store or send any data. Everything stays on your device.",
+  instH:"Save as an app on your phone",
+  inst:"On an iPhone, tap Share in Safari and then “Add to Home Screen”. On Android, open the browser menu and choose “Install app” or “Add to Home screen”.",
+  contact:"Would you like to lead your team in a healthier way and handle pressure better? I work with leaders and teams on exactly that.",
+  contactBtn:"drmandyzimmermann.com", legal:"Legal notice", privacy:"Privacy",
+  regions:{kopf:"Head and forehead",kiefer:"Jaw and face",hals:"Throat",schultern:"Neck and shoulders",brust:"Chest and heart",bauch:"Stomach and belly",ruecken:"Back",arme:"Arms and hands",beine:"Legs and feet"},
+  sens:{
+    eng:["Tight or tense","Something is contracting or holding on."],
+    druck:["Pressure","Something is pressing from inside or weighing on you."],
+    warm:["Warm or hot","Warmth is rising or spreading."],
+    kalt:["Cold","The area feels cool or as if less blood is reaching it."],
+    kribbelig:["Tingling","It prickles, buzzes or vibrates."],
+    schwer:["Heavy","The area feels tired and heavy."],
+    leer:["Empty or numb","You feel very little there, or almost nothing."],
+    unruhig:["Restless or fluttering","It fidgets, flutters or wants to move."]
+  },
+  ex:{
+    1:["Breathe out longer",["Breathe in through your nose for a count of four.","Breathe out slowly for a count of six to eight.","Repeat this five times. A long out-breath helps your body switch from alarm to calm."]],
+    2:["Feel the ground",["Place both feet flat on the floor and press them down gently.","Notice your heels, the balls of your feet and your toes, one after the other.","Pay attention to how the chair is supporting you."]],
+    3:["Let your shoulders drop",["As you breathe in, pull your shoulders up towards your ears and hold them briefly.","Let them drop as you breathe out.","Repeat three times, then let your arms hang loosely."]],
+    4:["Loosen your jaw",["Rest the tip of your tongue behind your upper front teeth and let your teeth part slightly.","Open your mouth slowly and close it again.","Massage your jaw muscles briefly with your fingertips."]],
+    5:["Place a hand",["Place one hand on the spot where you feel the sensation.","Breathe into it without trying to change anything.","Notice whether the sensation changes under your hand."]],
+    6:["Name the feeling",["Say or write one sentence: “Right now I feel … and I think it is …”","Research shows that putting a feeling into words often makes it less intense."]],
+    7:["Move for a moment",["Stand up and walk for a minute, for example to the window or along the corridor.","Shake out your arms and hands as you go.","Movement gives the energy in your body somewhere to go."]],
+    8:["Notice the room",["Look around and silently name three things you can see.","Then two things you can hear and one thing you can feel.","This brings your attention out of your head and back into the moment."]]
+  },
+  map:{
+    kopf:{
+      druck:["Overwhelm, tension, suppressed anger","Pressure in the head often comes when too much has to be thought through and decided at once.","Which of these decisions really has to be made by you today?",1],
+      warm:["Anger, shame, agitation","Warmth in the head and face often appears when you feel attacked or exposed.","What got to you in the last few minutes?",1],
+      leer:["Exhaustion, withdrawal, overwhelm","An empty head can be a sign that your nervous system is switching to power-saving mode.","When did you last have a real break?",8],
+      unruhig:["Nervousness, worry, impatience","Circling thoughts often come with a restless feeling in the head.","Which thought keeps coming back?",6]},
+    kiefer:{
+      eng:["Anger, determination, holding back","A clenched jaw often shows that you are enduring something or biting back words.","What would you like to say right now that you are not saying?",4],
+      warm:["Shame, embarrassment, anger","Blushing and warmth in the face often appear when you feel watched or judged.","Who do you feel judged by right now?",1]},
+    hals:{
+      eng:["Sadness, fear, disgust","The familiar lump in the throat often appears when tears or words are being held back.","What are you holding back right now?",6],
+      druck:["Unspoken anger, helplessness","Pressure in the throat can come when you want to say something and cannot find the moment.","Who do you need to tell something clearly?",1],
+      warm:["Being moved, excitement, shame","Warmth in the throat often comes with strong feelings just before you speak.","What is moving you so much right now?",5]},
+    schultern:{
+      eng:["Stress, alertness, fear","Raised shoulders are an old protective posture that often goes unnoticed when you are tense.","What are you trying to protect yourself from right now?",3],
+      schwer:["Weight of responsibility, exhaustion, sense of duty","Heavy shoulders often describe the feeling of carrying too much on your own.","What are you carrying right now that someone else could carry?",3],
+      druck:["Time pressure, anger, overwhelm","Pressure in the neck often comes with tight deadlines or lasting anger.","Which expectation is breathing down your neck right now?",3]},
+    brust:{
+      eng:["Fear, worry, stress","Tightness in the chest is one of the most common body signs of fear, because breathing becomes shallower.","What exactly are you afraid of right now?",1],
+      druck:["Sadness, disappointment, strain","Many people describe pressure on the chest when they are grieving or under lasting strain.","What has disappointed you?",5],
+      warm:["Joy, affection, pride, and also anger","Warmth in the chest shows up with pleasant feelings as well as with rising anger.","Is it more like connection or more like anger?",5],
+      schwer:["Sadness, discouragement, guilt","A heavy heart is an image many languages use for sadness.","What do you feel responsible for right now?",5],
+      unruhig:["Excitement, nervousness, anticipation","A racing heart comes with nervousness and with anticipation alike, and the body makes little difference between them.","Are you looking forward to it or afraid of it, or perhaps both?",1]},
+    bauch:{
+      eng:["Fear, insecurity, rejection","A knotted stomach often appears when something unpleasant is coming up.","What about your next meeting is sitting in your stomach?",5],
+      unruhig:["Nervousness, stage fright, anticipation","Butterflies in the stomach signal excitement, whether before a presentation or before something you look forward to.","What is at stake for you?",1],
+      schwer:["Worry, reluctance, guilt","A stone in the stomach often describes something you cannot or do not want to digest.","What is hard for you to accept right now?",5],
+      leer:["Uncertainty, loss, exhaustion","An empty feeling in the stomach can appear when support or orientation is missing.","What is giving you support right now?",2],
+      warm:["Anger, indignation, and also wellbeing","A fire in the belly is a common way to describe anger that is building up.","What are you angry about without showing it?",7]},
+    ruecken:{
+      eng:["Stress, defensiveness, lack of support","A tense back can show that you have to hold yourself upright without feeling anyone has your back.","Who would you like to have your back right now?",7],
+      schwer:["Exhaustion, burden, resignation","Heaviness in the back often appears when strain continues over a long time.","What would you need to put down for things to feel lighter?",2]},
+    arme:{
+      kribbelig:["Anger, drive, impatience","Tingling in the arms and hands often shows that the body wants to act.","What would you most like to tackle right now?",7],
+      warm:["Anger, rage, energy","Research shows particularly strong sensations in the arms and hands during anger.","What do you want to push back against?",7],
+      kalt:["Fear, tension, insecurity","Cold hands often come with tension, because the body directs blood towards its core.","Where do you feel unsure right now?",1],
+      unruhig:["Nervousness, impatience, tension","Fidgeting hands and fingers often show inner restlessness looking for an outlet.","What are you waiting for right now?",2]},
+    beine:{
+      schwer:["Sadness, exhaustion, lack of drive","Research links sadness with reduced sensation in the arms and legs, which many people describe as heaviness.","What would give you strength again right now?",7],
+      unruhig:["Impatience, urge to escape, nervousness","Jiggling legs often show a wish to get out of a situation.","Where would you most like to go right now?",7],
+      leer:["Fear, insecurity, powerlessness","Weak knees describe the feeling of not having firm ground under your feet.","What would you need to feel steady on your feet again?",2]}
+  }
+},
+es: {
+  title:"Señales del cuerpo",
+  intro:"¿Qué sientes ahora mismo en el cuerpo? Toca la zona, elige cómo lo sientes y descubre qué emociones podrían estar detrás. Te lleva un minuto y te ayuda a llegar con más claridad a tu próxima conversación.",
+  step1:"¿Dónde sientes algo?", step2:"¿Cómo lo sientes?",
+  backNote:"La espalda está marcada con una línea discontinua en la figura.",
+  feelingsH:"Qué podría haber detrás", questionH:"Una pregunta para ti", exH:"Un minuto para ti",
+  hint:"Son posibilidades y no un diagnóstico. Tú eres quien mejor se conoce. Si ninguna de estas emociones encaja, también eso es una información valiosa.",
+  otherSens:"Otra sensación", otherRegion:"Otra zona",
+  resH:"Sobre la investigación",
+  res:"Esta app se basa, entre otras fuentes, en el estudio “Bodily maps of emotions” (Nummenmaa y colegas, 2014). En él, personas de distintas culturas marcaron en qué parte del cuerpo sienten determinadas emociones y mostraron patrones muy parecidos. Las relaciones que propone esta app sirven de orientación y pueden ser distintas en cada persona.",
+  resLink:"Ver el estudio",
+  medH:"Aviso médico",
+  med:"Las sensaciones físicas también pueden tener causas médicas. Si las molestias son persistentes, fuertes o nuevas, consulta a un médico o una médica. Si tienes dolor en el pecho, dificultad para respirar o entumecimiento en un brazo o en la cara, llama de inmediato al 112.",
+  privH:"Privacidad", priv:"La app no guarda ni envía ningún dato. Todo se queda en tu dispositivo.",
+  instH:"Guardar como app en el móvil",
+  inst:"En el iPhone, toca Compartir en Safari y luego “Añadir a pantalla de inicio”. En Android, abre el menú del navegador y elige “Instalar aplicación” o “Añadir a pantalla de inicio”.",
+  contact:"¿Quieres liderar a tu equipo de una forma más saludable y gestionar mejor la presión? Acompaño a líderes y equipos en ese camino.",
+  contactBtn:"drmandyzimmermann.com", legal:"Aviso legal", privacy:"Privacidad",
+  regions:{kopf:"Cabeza y frente",kiefer:"Mandíbula y cara",hals:"Garganta",schultern:"Nuca y hombros",brust:"Pecho y corazón",bauch:"Vientre y estómago",ruecken:"Espalda",arme:"Brazos y manos",beine:"Piernas y pies"},
+  sens:{
+    eng:["Estrecho o tenso","Algo se contrae o se aferra."],
+    druck:["Presión","Algo empuja desde dentro o pesa desde fuera."],
+    warm:["Calor","El calor sube o se extiende."],
+    kalt:["Frío","La zona se siente fría o con menos riego."],
+    kribbelig:["Hormigueo","Pica, zumba o vibra."],
+    schwer:["Pesado","La zona se siente cansada y pesada."],
+    leer:["Vacío o adormecido","Sientes poco o casi nada en esa zona."],
+    unruhig:["Inquieto o agitado","Se mueve, revolotea o quiere moverse."]
+  },
+  ex:{
+    1:["Espirar más largo",["Inspira por la nariz contando hasta cuatro.","Espira despacio contando hasta seis u ocho.","Repítelo cinco veces. Una espiración larga ayuda al cuerpo a pasar de la alarma a la calma."]],
+    2:["Sentir el suelo",["Apoya los dos pies planos en el suelo y presiónalos un poco.","Siente los talones, la planta y los dedos, uno tras otro.","Fíjate en cómo te sostiene la silla."]],
+    3:["Soltar los hombros",["Al inspirar, sube los hombros hacia las orejas y mantenlos un momento.","Déjalos caer al espirar.","Repítelo tres veces y deja después los brazos sueltos."]],
+    4:["Aflojar la mandíbula",["Apoya la punta de la lengua detrás de los dientes de arriba y separa un poco los dientes.","Abre la boca despacio y vuelve a cerrarla.","Masajea un momento los músculos de la mandíbula con las yemas de los dedos."]],
+    5:["Poner la mano",["Pon una mano sobre la zona donde lo sientes.","Respira hacia ahí sin querer cambiar nada.","Observa si la sensación cambia bajo tu mano."]],
+    6:["Nombrar la emoción",["Di o escribe una frase: “Ahora mismo siento … y creo que es …”","Los estudios muestran que poner nombre a una emoción suele reducir su intensidad."]],
+    7:["Moverse un momento",["Levántate y camina un minuto, por ejemplo hasta la ventana o por el pasillo.","Sacude los brazos y las manos mientras caminas.","El movimiento le da una salida a la energía del cuerpo."]],
+    8:["Percibir el espacio",["Mira a tu alrededor y nombra en silencio tres cosas que ves.","Después dos cosas que oyes y una que sientes.","Así la atención sale de la cabeza y vuelve al momento presente."]]
+  },
+  map:{
+    kopf:{
+      druck:["Sobrecarga, tensión, enfado contenido","La presión en la cabeza aparece a menudo cuando hay que pensar y decidir demasiadas cosas a la vez.","¿Cuál de estas decisiones tienes que tomar tú hoy de verdad?",1],
+      warm:["Enfado, vergüenza, agitación","El calor en la cabeza y la cara suele aparecer cuando sientes que te atacan o te ponen en evidencia.","¿Qué te ha afectado en los últimos minutos?",1],
+      leer:["Agotamiento, retirada, sobrecarga","Una cabeza vacía puede ser una señal de que el sistema nervioso pasa a modo de ahorro.","¿Cuándo tuviste tu última pausa de verdad?",8],
+      unruhig:["Nerviosismo, preocupación, impaciencia","Los pensamientos que dan vueltas suelen ir acompañados de inquietud en la cabeza.","¿Qué pensamiento vuelve una y otra vez?",6]},
+    kiefer:{
+      eng:["Enfado, determinación, contención","Una mandíbula apretada suele indicar que estás aguantando algo o callándote algo.","¿Qué te gustaría decir ahora y no estás diciendo?",4],
+      warm:["Vergüenza, apuro, enfado","Sonrojarse y sentir calor en la cara es frecuente cuando sientes que te observan o te juzgan.","¿Quién sientes que te está juzgando ahora?",1]},
+    hals:{
+      eng:["Tristeza, miedo, asco","El conocido nudo en la garganta suele aparecer cuando se contienen lágrimas o palabras.","¿Qué estás conteniendo ahora?",6],
+      druck:["Enfado no expresado, impotencia","La presión en la garganta puede aparecer cuando quieres decir algo y no encuentras el momento.","¿A quién tendrías que decirle algo con claridad?",1],
+      warm:["Emoción, agitación, vergüenza","El calor en la garganta suele acompañar a emociones fuertes justo antes de hablar.","¿Qué te está conmoviendo tanto ahora?",5]},
+    schultern:{
+      eng:["Estrés, alerta, miedo","Los hombros levantados son una postura de protección antigua que, con la tensión, a menudo pasa desapercibida.","¿De qué quieres protegerte ahora?",3],
+      schwer:["Peso de la responsabilidad, agotamiento, sentido del deber","Los hombros pesados describen a menudo la sensación de cargar demasiado sin ayuda.","¿Qué estás cargando ahora que podría cargar otra persona?",3],
+      druck:["Presión de tiempo, enfado, sobrecarga","La presión en la nuca suele aparecer con plazos ajustados o con un enfado que dura.","¿Qué expectativa te está pesando en la nuca ahora?",3]},
+    brust:{
+      eng:["Miedo, preocupación, estrés","La opresión en el pecho es una de las señales corporales más frecuentes del miedo, porque la respiración se vuelve más superficial.","¿Qué temes ahora en concreto?",1],
+      druck:["Tristeza, decepción, carga","Muchas personas describen presión en el pecho cuando sienten pena o una carga que se prolonga.","¿Qué te ha decepcionado?",5],
+      warm:["Alegría, cariño, orgullo, y también enfado","El calor en el pecho aparece tanto con emociones agradables como con un enfado que sube.","¿Se parece más a la conexión o más al enfado?",5],
+      schwer:["Tristeza, desánimo, culpa","Un corazón pesado es una imagen que muchos idiomas usan para la tristeza.","¿De qué te sientes responsable ahora?",5],
+      unruhig:["Agitación, nerviosismo, ilusión","El corazón acelerado aparece con los nervios y con la ilusión, y el cuerpo apenas distingue entre ambos.","¿Te hace ilusión o te da miedo, o quizá las dos cosas?",1]},
+    bauch:{
+      eng:["Miedo, inseguridad, rechazo","Un estómago encogido suele aparecer cuando se acerca algo desagradable.","¿Qué de tu próxima reunión se te ha quedado en el estómago?",5],
+      unruhig:["Nerviosismo, miedo escénico, ilusión","Las mariposas en el estómago indican agitación, ya sea antes de una presentación o de algo que te ilusiona.","¿Qué está en juego para ti?",1],
+      schwer:["Preocupación, resistencia, culpa","Una piedra en el estómago describe a menudo algo que no puedes o no quieres digerir.","¿Qué te está costando aceptar ahora?",5],
+      leer:["Inseguridad, pérdida, agotamiento","Un vacío en el estómago puede aparecer cuando falta apoyo u orientación.","¿Qué te da apoyo ahora?",2],
+      warm:["Enfado, indignación, y también bienestar","El fuego en las entrañas es una forma habitual de describir un enfado que se acumula.","¿Qué te está enfadando sin que lo muestres?",7]},
+    ruecken:{
+      eng:["Estrés, defensa, falta de apoyo","Una espalda tensa puede indicar que tienes que mantenerte en pie sin sentir respaldo.","¿De quién te gustaría sentir respaldo ahora?",7],
+      schwer:["Agotamiento, carga, resignación","La pesadez en la espalda suele aparecer cuando la carga se mantiene durante mucho tiempo.","¿Qué tendrías que soltar para que todo pese menos?",2]},
+    arme:{
+      kribbelig:["Enfado, ganas de actuar, impaciencia","El hormigueo en brazos y manos suele indicar que el cuerpo quiere actuar.","¿Qué te gustaría abordar ahora mismo?",7],
+      warm:["Enfado, rabia, energía","La investigación muestra sensaciones especialmente intensas en brazos y manos cuando hay enfado.","¿Contra qué quieres defenderte?",7],
+      kalt:["Miedo, tensión, inseguridad","Las manos frías aparecen a menudo con la tensión, porque el cuerpo dirige la sangre hacia el centro.","¿Dónde sientes inseguridad ahora?",1],
+      unruhig:["Nerviosismo, impaciencia, tensión","Las manos y los dedos inquietos suelen mostrar una inquietud interior que busca una salida.","¿Qué estás esperando ahora?",2]},
+    beine:{
+      schwer:["Tristeza, agotamiento, desgana","La investigación relaciona la tristeza con menos sensación en brazos y piernas, algo que muchas personas describen como pesadez.","¿Qué te devolvería la fuerza ahora?",7],
+      unruhig:["Impaciencia, ganas de huir, nerviosismo","Las piernas que no paran de moverse suelen mostrar el deseo de salir de una situación.","¿Adónde te gustaría ir ahora mismo?",7],
+      leer:["Miedo, inseguridad, impotencia","Las rodillas flojas describen la sensación de no tener un apoyo firme.","¿Qué necesitarías para volver a sentirte firme?",2]}
+  }
+}
+};
 const REGIONS=["kopf","kiefer","hals","schultern","brust","bauch","ruecken","arme","beine"];
 const SENS=["eng","druck","warm","kalt","kribbelig","schwer","leer","unruhig"];
 const STUDY="https://doi.org/10.1073/pnas.1321664111";
