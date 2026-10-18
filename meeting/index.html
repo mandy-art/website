@@ -82,6 +82,18 @@ summary{cursor:pointer;padding:8px 0;color:var(--muted);font-weight:500}
 .facts{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
 .contact{font-size:.85rem;color:var(--muted);text-align:center;margin:8px 0 0;line-height:1.5}
 .contact a{color:var(--terra);font-weight:500}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--sand);border-radius:12px;padding:4px;gap:4px}
+.seg button{font:500 .95rem var(--sans);border:none;border-radius:9px;padding:10px 8px;background:transparent;color:var(--muted);cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--brown);box-shadow:0 1px 3px rgba(69,27,12,.12)}
+.pane{display:flex;flex-direction:column;gap:16px}
+[hidden]{display:none!important}
+.fields{display:grid;grid-template-columns:1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field select{font:500 1rem var(--sans);color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.plan-figure{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.plan-figure b{font:600 2rem var(--serif);color:var(--brown);font-variant-numeric:tabular-nums}
+.invite{background:var(--card);border:1px dashed var(--terra);border-radius:12px;padding:14px 16px;font-size:.95rem;line-height:1.55;user-select:all;-webkit-user-select:all}
+.copied{font-size:.85rem;color:var(--terra);text-align:center;min-height:1.2em;margin:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 .install{display:flex;gap:12px;align-items:flex-start;background:var(--sand);border-radius:12px;padding:12px 14px;font-size:.88rem;color:var(--text)}
 .install b{color:var(--brown)}
@@ -113,8 +125,24 @@ footer.legal a{color:var(--muted)}
       <div class="roles" id="rolesSetup"></div>
       <p class="note" id="tRateNote"></p>
     </div>
-    <div class="summary-line"><span id="tPerHour"></span><b id="setupPerHour"></b></div>
-    <button class="btn btn-primary" id="startBtn"></button>
+    <div class="seg" role="tablist">
+      <button role="tab" id="segLive" aria-selected="true"></button>
+      <button role="tab" id="segPlan" aria-selected="false"></button>
+    </div>
+    <div class="pane" id="paneLive">
+      <div class="summary-line"><span id="tPerHour"></span><b id="setupPerHour"></b></div>
+      <button class="btn btn-primary" id="startBtn"></button>
+    </div>
+    <div class="pane" id="panePlan" hidden>
+      <div class="fields">
+        <label class="field"><span class="label" id="tDur"></span><select id="planDur"></select></label>
+        <select id="planFreq" hidden></select><span id="tFreq" hidden></span>
+      </div>
+      <div class="plan-figure"><span id="tPlanCost"></span><b id="planCost"></b></div>
+      <div class="invite" id="planText"></div>
+      <button class="btn btn-primary" id="copyBtn"></button>
+      <p class="copied" id="copied" aria-live="polite"></p>
+    </div>
   </section>
 
   <!-- Läuft -->
@@ -170,7 +198,7 @@ const T={
   resultLabel:"Dieses Meeting hat gekostet",resTime:"Dauer",resPeople:"Teilnehmende",resYear:"Jährlich bei wöchentlichem Termin",
   jokeNone:"Das war günstiger als ein Cappuccino. Kurz und knapp, so darf es gerne weitergehen.",
   joke:"Wir hoffen, es hat sich gelohnt. Für dieses Geld hätte Ihr Unternehmen auch {n} {item} kaufen können.",
-  newM:"Neues Meeting",installH:"Als App auf dem Handy speichern",installIos:"Tippen Sie in Safari auf Teilen und dann auf „Zum Home-Bildschirm“.",installBtn:"Installieren",legal:"Impressum",privacy:"Datenschutz",installOther:"Im Browsermenü „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.",
+  newM:"Neues Meeting",installH:"Als App auf dem Handy speichern",installIos:"Tippen Sie in Safari auf Teilen und dann auf „Zum Home-Bildschirm“.",installBtn:"Installieren",legal:"Impressum",privacy:"Datenschutz",installOther:"Im Browsermenü „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.",planJoke:" Für dasselbe Geld könnten wir auch {acc} kaufen. Bitte kommen Sie vorbereitet, damit sich das Meeting mehr lohnt als {nom}.",segLive:"Live messen",segPlan:"Einladung planen",dur:"Dauer",freq:"Rhythmus",planCost:"Voraussichtliche Kosten",copy:"Text für die Einladung kopieren",copied:"Kopiert. Jetzt einfach in die Einladung einfügen.",min:"Minuten",freqs:["Einmalig","Wöchentlich","Alle zwei Wochen","Monatlich"],freqAdj:["","wöchentlicher","zweiwöchentlicher","monatlicher"],planOnce:"Hinweis: Dieses Meeting kostet voraussichtlich rund {cost} ({n} Teilnehmende, {d} Minuten).",planRec:" Als {f} Termin sind das rund {y} im Jahr.",planSig:" Berechnet mit der Meeting Kostenuhr: drmandyzimmermann.com/meeting",
   contact:"Sie möchten Meetings, die ihr Geld wert sind? Dr. Mandy Zimmermann arbeitet mit Führungskräften und Teams daran, wie sie entscheiden und zusammenarbeiten.",
   roles:["Geschäftsführung","Führungskraft","Fachkraft","Mitarbeitende"]},
  en:{locale:"en-GB",app:"Meeting Cost Clock",
@@ -184,7 +212,7 @@ const T={
   resultLabel:"This meeting cost",resTime:"Duration",resPeople:"Attendees",resYear:"Per year if held weekly",
   jokeNone:"That was cheaper than a cappuccino. Short and focused, please keep it that way.",
   joke:"We hope it was worth it. For the same money, your company could have bought {n} {item}.",
-  newM:"New meeting",installH:"Save as an app on your phone",installIos:"In Safari, tap Share and then “Add to Home Screen”.",installBtn:"Install",legal:"Legal notice",privacy:"Privacy",installOther:"In the browser menu, choose “Install app” or “Add to Home screen”.",
+  newM:"New meeting",installH:"Save as an app on your phone",installIos:"In Safari, tap Share and then “Add to Home Screen”.",installBtn:"Install",legal:"Legal notice",privacy:"Privacy",installOther:"In the browser menu, choose “Install app” or “Add to Home screen”.",planJoke:" For the same money we could buy {acc}. Please come prepared, so the meeting is worth more than {nom}.",segLive:"Live timer",segPlan:"Plan an invite",dur:"Duration",freq:"Frequency",planCost:"Expected cost",copy:"Copy text for the invite",copied:"Copied. Paste it into your invitation.",min:"minutes",freqs:["One-off","Weekly","Every two weeks","Monthly"],freqAdj:["","weekly","fortnightly","monthly"],planOnce:"Note: this meeting is expected to cost around {cost} ({n} attendees, {d} minutes).",planRec:" As a {f} meeting, that adds up to around {y} per year.",planSig:" Calculated with the Meeting Cost Clock: drmandyzimmermann.com/meeting",
   contact:"Would you like meetings that are worth their cost? Dr. Mandy Zimmermann works with leaders and teams on how they decide and work together.",
   roles:["Managing director","Manager","Specialist","Employee"]},
  es:{locale:"es-ES",app:"Reloj de costes",
@@ -198,20 +226,20 @@ const T={
   resultLabel:"Esta reunión ha costado",resTime:"Duración",resPeople:"Participantes",resYear:"Al año si es semanal",
   jokeNone:"Ha salido más barata que un capuchino. Breve y al grano, así da gusto.",
   joke:"Esperamos que haya valido la pena. Con este dinero, su empresa podría haber comprado {n} {item}.",
-  newM:"Nueva reunión",installH:"Guardar como app en el móvil",installIos:"En Safari, pulse Compartir y luego “Añadir a pantalla de inicio”.",installBtn:"Instalar",legal:"Aviso legal",privacy:"Privacidad",installOther:"En el menú del navegador, elija “Instalar aplicación” o “Añadir a pantalla de inicio”.",
+  newM:"Nueva reunión",installH:"Guardar como app en el móvil",installIos:"En Safari, pulse Compartir y luego “Añadir a pantalla de inicio”.",installBtn:"Instalar",legal:"Aviso legal",privacy:"Privacidad",installOther:"En el menú del navegador, elija “Instalar aplicación” o “Añadir a pantalla de inicio”.",planJoke:" Con el mismo dinero podríamos comprar {acc}. Por favor, prepare la reunión para que valga más que {nom}.",segLive:"Medir en vivo",segPlan:"Planificar invitación",dur:"Duración",freq:"Frecuencia",planCost:"Coste previsto",copy:"Copiar texto para la invitación",copied:"Copiado. Péguelo en la invitación.",min:"minutos",freqs:["Una vez","Semanal","Cada dos semanas","Mensual"],freqAdj:["","semanal","quincenal","mensual"],planOnce:"Nota: esta reunión costará aproximadamente {cost} ({n} participantes, {d} minutos).",planRec:" Como reunión {f}, suma unos {y} al año.",planSig:" Calculado con el Reloj de costes: drmandyzimmermann.com/meeting",
   contact:"¿Quiere reuniones que valgan lo que cuestan? La Dra. Mandy Zimmermann trabaja con directivos y equipos en cómo deciden y colaboran.",
   roles:["Dirección general","Mando directivo","Especialista","Empleado/a"]}
 };
 const ITEMS=[
- {p:3.5, de:["Cappuccino","Cappuccinos"],en:["cappuccino","cappuccinos"],es:["capuchino","capuchinos"]},
- {p:12,  de:["Pizza","Pizzen"],en:["pizza","pizzas"],es:["pizza","pizzas"]},
- {p:28,  de:["Fachbuch","Fachbücher"],en:["business book","business books"],es:["libro de gestión","libros de gestión"]},
- {p:90,  de:["Tankfüllung","Tankfüllungen"],en:["full tank of fuel","full tanks of fuel"],es:["depósito de gasolina","depósitos de gasolina"]},
- {p:450, de:["Bürostuhl","Bürostühle"],en:["office chair","office chairs"],es:["silla de oficina","sillas de oficina"]},
- {p:900, de:["Kurzurlaub auf Fuerteventura","Kurzurlaube auf Fuerteventura"],en:["long weekend on Fuerteventura","long weekends on Fuerteventura"],es:["escapada a Fuerteventura","escapadas a Fuerteventura"]},
- {p:1300,de:["Laptop","Laptops"],en:["laptop","laptops"],es:["portátil","portátiles"]},
- {p:2800,de:["E-Bike","E-Bikes"],en:["e-bike","e-bikes"],es:["bicicleta eléctrica","bicicletas eléctricas"]},
- {p:18000,de:["Kleinwagen","Kleinwagen"],en:["small car","small cars"],es:["coche pequeño","coches pequeños"]}
+ {p:3.5, a:["einen","ein","a","un"],de:["Cappuccino","Cappuccinos"],en:["cappuccino","cappuccinos"],es:["capuchino","capuchinos"]},
+ {p:12,  a:["eine","eine","a","una"],de:["Pizza","Pizzen"],en:["pizza","pizzas"],es:["pizza","pizzas"]},
+ {p:28,  a:["ein","ein","a","un"],de:["Fachbuch","Fachbücher"],en:["business book","business books"],es:["libro de gestión","libros de gestión"]},
+ {p:90,  a:["eine","eine","a","un"],de:["Tankfüllung","Tankfüllungen"],en:["full tank of fuel","full tanks of fuel"],es:["depósito de gasolina","depósitos de gasolina"]},
+ {p:450, a:["einen","ein","an","una"],de:["Bürostuhl","Bürostühle"],en:["office chair","office chairs"],es:["silla de oficina","sillas de oficina"]},
+ {p:900, a:["einen","ein","a","una"],de:["Kurzurlaub auf Fuerteventura","Kurzurlaube auf Fuerteventura"],en:["long weekend on Fuerteventura","long weekends on Fuerteventura"],es:["escapada a Fuerteventura","escapadas a Fuerteventura"]},
+ {p:1300,a:["einen","ein","a","un"],de:["Laptop","Laptops"],en:["laptop","laptops"],es:["portátil","portátiles"]},
+ {p:2800,a:["ein","ein","an","una"],de:["E-Bike","E-Bikes"],en:["e-bike","e-bikes"],es:["bicicleta eléctrica","bicicletas eléctricas"]},
+ {p:18000,a:["einen","ein","a","un"],de:["Kleinwagen","Kleinwagen"],en:["small car","small cars"],es:["coche pequeño","coches pequeños"]}
 ];
 const DEFAULT_RATES=[140,90,60,40], DEFAULT_COUNTS=[1,3,4,0];
 
@@ -277,7 +305,7 @@ function renderTexts(){
   document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
   const map={tSetupH:"setupH",tSetupLead:"setupLead",tWho:"who",tRateNote:"rateNote",tPerHour:"perHour",startBtn:"start",
     tLiveLabel:"liveLabel",tTime:"time",tPerMin:"perMin",tPeople:"people",endBtn:"end",tAdjust:"adjust",
-    tResultLabel:"resultLabel",tResTime:"resTime",tResPeople:"resPeople",tResYear:"resYear",newBtn:"newM",tContact:"contact",tLegal:"legal",tPrivacy:"privacy",tInstallH:"installH",installBtn:"installBtn"};
+    tResultLabel:"resultLabel",tResTime:"resTime",tResPeople:"resPeople",tResYear:"resYear",newBtn:"newM",tContact:"contact",segLive:"segLive",segPlan:"segPlan",tDur:"dur",tFreq:"freq",tPlanCost:"planCost",copyBtn:"copy",tLegal:"legal",tPrivacy:"privacy",tInstallH:"installH",installBtn:"installBtn"};
   $("tInstallTxt").textContent=installMode==="prompt"?"":(isIOS?t("installIos"):t("installOther"));
   for(const id in map) $(id).textContent=t(map[id]);
 }
@@ -288,6 +316,7 @@ function renderAll(){
     show("vSetup"); renderRoles($("rolesSetup"),false);
     $("setupPerHour").textContent=money(perHour(),0);
     $("startBtn").disabled=people()===0;
+    renderPlan();
   } else if(S.ended){
     show("vResult");
     $("resAmount").textContent=money(S.cost);
@@ -331,6 +360,45 @@ $("pauseBtn").onclick=()=>{settle();S.running=!S.running;S.lastTs=Date.now();sav
 $("endBtn").onclick=()=>{settle();S.running=false;S.ended=true;save();clearTimeout(raf);lockScreen(false);renderAll()};
 $("newBtn").onclick=()=>{S=null;save();renderAll()};
 document.querySelectorAll(".langs button").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;store.set("lang",lang);renderAll()});
+
+// Planungsmodus
+const DURS=[15,30,45,60,90,120], YEARLY=[0,45,22,11];
+let mode=store.get("mode","live"), planDur=store.get("planDur",60), planFreq=store.get("planFreq",1);
+function itemPhrase(cost){
+  let pick=null; for(const it of ITEMS){ if(cost>=it.p) pick=it; }
+  if(!pick) return null;
+  const n=Math.floor(cost/pick.p), name=pick[lang];
+  if(n===1){
+    if(lang==="de") return {acc:pick.a[0]+" "+name[0], nom:pick.a[1]+" "+name[0]};
+    const a=lang==="en"?pick.a[2]:pick.a[3]; return {acc:a+" "+name[0], nom:a+" "+name[0]};
+  }
+  const x=new Intl.NumberFormat(T[lang].locale).format(n)+" "+name[1]; return {acc:x,nom:x};
+}
+function renderPlan(){
+  const segL=$("segLive"),segP=$("segPlan");
+  segL.setAttribute("aria-selected",mode==="live");segP.setAttribute("aria-selected",mode==="plan");
+  $("paneLive").hidden=mode!=="live";$("panePlan").hidden=mode!=="plan";
+  $("planDur").innerHTML=DURS.map(d=>`<option value="${d}"${d===planDur?" selected":""}>${d} ${t("min")}</option>`).join("");
+  $("planFreq").innerHTML=t("freqs").map((f,i)=>`<option value="${i}"${i===planFreq?" selected":""}>${f}</option>`).join("");
+  const cost=perHour()*planDur/60, rCost=Math.max(10,Math.round(cost/10)*10), year=Math.round(cost*YEARLY[planFreq]/100)*100;
+  $("planCost").textContent=money(rCost,0);
+  let txt=t("planOnce").replace("{cost}",money(rCost,0)).replace("{n}",people()).replace("{d}",planDur);
+  const ip=itemPhrase(rCost); if(ip) txt+=t("planJoke").replace("{acc}",ip.acc).replace("{nom}",ip.nom);
+  if(false) txt+=t("planRec").replace("{f}",t("freqAdj")[planFreq]).replace("{y}",money(year,0));
+  txt+=t("planSig");
+  $("planText").textContent=txt;
+  $("copyBtn").disabled=people()===0;
+}
+$("segLive").onclick=()=>{mode="live";store.set("mode",mode);renderPlan()};
+$("segPlan").onclick=()=>{mode="plan";store.set("mode",mode);renderPlan()};
+$("planDur").onchange=e=>{planDur=+e.target.value;store.set("planDur",planDur);renderPlan()};
+$("planFreq").onchange=e=>{planFreq=+e.target.value;store.set("planFreq",planFreq);renderPlan()};
+$("copyBtn").onclick=()=>{
+  const txt=$("planText").textContent;
+  const done=()=>{$("copied").textContent=t("copied");setTimeout(()=>$("copied").textContent="",3500)};
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents($("planText"));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);try{document.execCommand("copy");done()}catch(e){}};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(fallback)}else fallback();
+};
 
 
 // Installation als App
