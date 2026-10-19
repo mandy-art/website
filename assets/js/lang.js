@@ -1,5 +1,5 @@
 // Sprachen, deren Inhalte fertig sind. Neue Sprache hier ergänzen, sobald sie online geht.
-var SITE_LANGS = ["de", "en"];
+var SITE_LANGS = ["de", "en", "es"];
 // Reihenfolge, falls die Browsersprache nicht verfügbar ist
 var SITE_FALLBACK = ["en", "de"];
 function siteLang() {
