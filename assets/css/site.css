@@ -137,3 +137,8 @@ a{color:var(--terra)}
  .about .wrap{grid-template-columns:1fr;gap:24px}
  .about-photo{aspect-ratio:4/5;max-height:420px;object-position:50% 25%}
 }
+.prose{padding:40px 0 64px}
+.prose .wrap{max-width:780px}
+.prose h2{font-size:1.25rem;margin:1.8em 0 .5em}
+.prose .note{color:var(--muted);font-size:.9rem}
+.prose address{font-style:normal;margin-bottom:1em}
