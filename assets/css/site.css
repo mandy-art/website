@@ -201,3 +201,31 @@ a:focus-visible,.path:focus-visible{outline:3px solid var(--terra);outline-offse
  .site-footer .wrap{flex-direction:column;align-items:flex-start}
 }
 @media (min-width:761px){.about-figure{position:sticky;top:24px}}
+
+/* Fotos */
+.page-head .wrap.split{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:56px;align-items:end}
+.head-photo{position:relative;z-index:2;margin:0 0 calc(-1 * clamp(56px,9vw,120px));max-width:340px;justify-self:end;width:100%}
+.head-photo::before{content:"";position:absolute;inset:0;border-radius:10px;background:var(--offset,var(--terra));transform:translate(16px,16px)}
+.head-photo img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px}
+.page-head.coaching .head-photo{--offset:var(--sand)}
+.page-head.interim + .horizon,.page-head.coaching + .horizon{position:relative;z-index:1}
+.photo-band{line-height:0}
+.photo-band img{width:100%;height:clamp(240px,34vw,480px);object-fit:cover;display:block}
+.photo-band + .horizon{margin-top:calc(-1 * clamp(56px,9vw,120px));background:transparent}
+.cta.split{padding:56px 0}
+.cta.split .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.cta-photo{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:10px;display:block}
+.cta.split .cta-text p{font-family:inherit;font-size:1.05rem;font-weight:400;margin:0 0 1.2em}
+.cta.split .cta-text h2{color:inherit;margin-bottom:.4em}
+.themes-split{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:center}
+.themes-photo{position:relative;margin:0}
+.themes-photo::before{content:"";position:absolute;inset:0;border-radius:10px;background:var(--sky);transform:translate(-14px,14px)}
+.themes-photo img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px}
+@media (max-width:760px){
+ .page-head .wrap.split{grid-template-columns:1fr;gap:24px}
+ .head-photo{justify-self:start;max-width:none;margin-bottom:calc(-1 * clamp(56px,9vw,120px));margin-right:16px;width:auto}
+ .head-photo img{aspect-ratio:3/2;object-position:50% 25%}
+ .cta.split .wrap{grid-template-columns:1fr;gap:24px}
+ .themes-split{grid-template-columns:1fr;gap:32px}
+ .themes-photo{margin-left:14px;max-width:320px}
+}
