@@ -411,7 +411,7 @@ const SENS=["eng","druck","warm","kalt","kribbelig","schwer","leer","unruhig"];
 const STUDY="https://doi.org/10.1073/pnas.1321664111";
 
 const store={get(k,d){try{const v=localStorage.getItem("ks_"+k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem("ks_"+k,v)}catch(e){}}};
-let lang=store.get("lang",null)||(()=>{const l=(navigator.language||"de").slice(0,2);return T[l]?l:"de"})();
+let lang=store.get("lang",null)||(()=>{try{const s=localStorage.getItem("site_lang");if(s&&T[s])return s}catch(e){}const l=(navigator.language||"de").slice(0,2);return T[l]?l:"de"})();
 if(!T[lang]) lang="de";
 let region=null, sens=null;
 const $=id=>document.getElementById(id);
