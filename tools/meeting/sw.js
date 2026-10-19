@@ -1,5 +1,5 @@
 // Speichert die App für die Offline-Nutzung. Bei Änderungen die Versionsnummer erhöhen.
-const CACHE = "kostenuhr-v2";
+const CACHE = "kostenuhr-v3";
 const FILES = [
   "./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./favicon.png",
   "../../source-serif-4-latin-400-normal.woff2", "../../source-serif-4-latin-600-normal.woff2",
