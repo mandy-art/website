@@ -114,3 +114,13 @@ a{color:var(--terra)}
  .results li::before{left:15px;top:21px}
  .cta p{font-size:1.15rem}
 }
+.coaching-page .card{border-left-color:var(--sky)}
+.coaching-page .results li::before{background:var(--sky)}
+.coaching-page .cta{background:var(--sky-soft)}
+.cards.two{grid-template-columns:repeat(2,1fr)}
+.tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.tags li{background:#fff;border:1px solid var(--line);border-radius:30px;padding:8px 16px;font-size:.95rem}
+.quals li small{display:block;color:var(--muted);font-size:.85rem}
+.network{background:#fff;border-radius:6px;padding:24px 26px;max-width:820px;box-shadow:0 1px 3px rgba(69,27,12,.06)}
+.network p:last-child{margin:0}
+@media (max-width:900px){.cards.two{grid-template-columns:1fr}}
